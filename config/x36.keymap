@@ -9,87 +9,157 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        tab_esc_ctrl: tab_esc_ctrl {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAB_ESC_CTRL";
+            #binding-cells = <0>;
+            bindings = <&mt LCTRL ESC>, <&kp TAB>;
+        };
+
+        gqt: global-quick-tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GLOBAL_QUICK_TAP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            quick-tap-ms = <180>;
+            tapping-term-ms = <200>;
+            global-quick-tap;
+            flavor = "tap-preferred";
+        };
+
+        ltq: ltq {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LTQ";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            global-quick-tap;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <180>;
+            flavor = "tap-preferred";
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
-        combo1 {
+        left_bkt {
+            bindings = <&kp ESC>;
+            key-positions = <0 1>;
+            timeout-ms = <50>;
+        };
+
+        right_bkt {
             bindings = <&kp BACKSPACE>;
-            key-positions = <9 10>;
+            key-positions = <8 9>;
+            timeout-ms = <50>;
         };
 
-        combo2 {
+        left_par {
             bindings = <&kp ENTER>;
-            key-positions = <21 22>;
+            key-positions = <18 19>;
+            timeout-ms = <50>;
         };
 
-        combo4 {
-            bindings = <&kp ESCAPE>;
-            key-positions = <1 0>;
+        right_par {
+            bindings = <&kp PAGE_UP>;
+            key-positions = <6 7>;
+            timeout-ms = <50>;
         };
 
-        combo5 {
-            bindings = <&kp EQUAL>;
-            key-positions = <21 20>;
+        left_brace {
+            bindings = <&kp PG_DN>;
+            key-positions = <16 17>;
+            timeout-ms = <50>;
         };
 
-        combo6 {
-            bindings = <&kp MINUS>;
-            key-positions = <20 19>;
+        right_brace {
+            bindings = <&kp HOME>;
+            key-positions = <2 3>;
+            timeout-ms = <50>;
         };
 
-        cmb5 {
-            bindings = <&kp CAPS>;
-            key-positions = <13 14>;
+        bac {
+            bindings = <&kp END>;
+            key-positions = <12 13>;
         };
 
-        com6 {
-            bindings = <&bootloader>;
+        pipe {
+            bindings = <&kp LS(N9)>;
+            key-positions = <7 8>;
+        };
+
+        youkouhao {
+            bindings = <&kp LS(N0)>;
+            key-positions = <17 18>;
+        };
+
+        del {
+            bindings = <&kp DELETE>;
+            key-positions = <10 11>;
+        };
+
+        caps {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <20 21>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
             key-positions = <28 29>;
         };
+    };
 
-        com7 {
-            bindings = <&kp TAB>;
-            key-positions = <26 25>;
+    macros {
+        KEY: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(C) &kp H &kp L &kp DOT &kp N8 &kp N8 &kp N0 &kp N6 &kp N0 &kp N2 &kp EXCL &kp AT &kp POUND &kp DLLR &kp PRCNT &kp CARET &kp ENTER>;
+            label = "NEW_MACRO";
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        mac_layer {
-            display-name = "QWERTY";
+        Base {
+            label = "Base";
             bindings = <
-&kp ESCAPE      &kp Q  &kp W  &kp E      &kp R        &kp T                 &kp Y        &kp U           &kp I      &kp O    &kp P     &kp BACKSPACE
-&kp CAPS        &kp A  &kp S  &kp D      &kp F        &kp G                 &kp H        &kp J           &kp K      &kp L    &kp SEMI  &kp ENTER
-&kp LEFT_SHIFT  &kp Z  &kp X  &kp C      &kp V        &kp B                 &kp N        &kp M           &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
-                              &lt 3 SQT  &lt 2 SPACE  &mt LCTRL LEFT_WIN    &lt 1 SPACE  &kp LEFT_SHIFT  &kp SQT
+  &kp Q  &kp W  &kp E      &kp R        &kp T               &kp Y        &kp U                 &kp I      &kp O    &kp P
+  &kp A  &kp S  &kp D      &kp F        &kp G               &kp H        &kp J                 &kp K      &kp L    &kp SEMICOLON
+  &kp Z  &kp X  &kp C      &kp V        &kp B               &kp N        &kp M                 &kp COMMA  &kp DOT  &mt LEFT_SHIFT SLASH
+                &lt 3 SQT  &lt 2 SPACE  &mt LCTRL LEFT_WIN  &lt 1 SPACE  &kp NON_US_BACKSLASH  &kp SQT
             >;
         };
 
-        win_layer {
+        Number {
+            label = "Number";
             bindings = <
-&none  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6       &kp N7  &kp N8  &kp N9      &kp N0  &none
-&none  &none   &none   &none   &none   &none     &none        &none   &none   &none       &none   &none
-&none  &none   &none   &none   &none   &none     &bootloader  &none   &none   &kp PERIOD  &none   &none
-                       &none   &none   &none     &none        &none   &none
+  &kp N1  &kp N2  &kp N3  &kp N4        &kp N5           &kp N6     &kp N7     &kp N8  &kp N9      &kp N0
+  &none   &none   &none   &none         &none            &none      &none      &none   &none       &none
+  &none   &none   &KEY    &kp C_VOL_DN  &kp C_VOLUME_UP  &none      &none      &none   &kp PERIOD  &none
+                  &none   &kp SPACE     &kp SPACE        &kp SPACE  &kp SPACE  &none
             >;
         };
 
-        layer_1 {
+        Icons {
+            label = "Icons";
             bindings = <
-&none  &kp LS(N1)    &kp LS(N2)      &kp LS(N3)    &kp LS(N4)    &kp LS(N5)     &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &none
-&none  &none         &kp LEFT_ARROW  &kp DEL       &kp RIGHT     &bt BT_CLR     &none       &none       &none       &none       &none       &none
-&none  &bt BT_SEL 3  &bt BT_SEL 2    &bt BT_SEL 1  &bt BT_SEL 0  &bootloader    &none       &none       &none       &trans      &none       &none
-                                     &none         &none         &none          &none       &none       &none
+  &kp LS(N1)    &kp LS(N2)    &kp LS(N3)    &kp LS(N4)    &kp LS(N5)   &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)
+  &none         &kp LEFT      &kp DEL       &kp RIGHT     &bt BT_CLR   &none       &none       &none       &none       &none
+  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bootloader  &none       &none       &none       &none       &none
+                              &none         &none         &none        &none       &none       &none
             >;
         };
 
-        layer_2 {
+        layer_3 {
             bindings = <
-&none  &none     &kp UP_ARROW    &none      &none  &none    &none  &none  &none  &none  &none  &none
-&none  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT  &none  &none    &none  &none  &none  &none  &none  &none
-&none  &none     &none           &none      &none  &none    &none  &none  &none  &none  &none  &none
-                                 &none      &none  &none    &none  &none  &none
+  &trans    &kp UP_ARROW  &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &kp LEFT  &kp DOWN      &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+  &trans    &trans        &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                          &trans     &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
