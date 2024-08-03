@@ -75,12 +75,12 @@
 
         f {
             bindings = <&kp CAPS>;
-            key-positions = <11 12>;
+            key-positions = <11 10>;
         };
 
         g {
             bindings = <&kp TAB>;
-            key-positions = <22 21>;
+            key-positions = <21 20>;
         };
 
         h {
