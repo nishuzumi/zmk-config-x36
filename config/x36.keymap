@@ -148,10 +148,10 @@
 
         layer_3 {
             bindings = <
-  &trans    &kp UP_ARROW  &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &kp LEFT  &kp DOWN      &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-  &trans    &trans        &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans
-            &trans        &trans     &trans  &trans  &trans  &trans
+  &trans    &kp UP_ARROW  &trans     &sys_reset  &trans  &trans  &trans  &trans  &trans  &trans
+  &kp LEFT  &kp DOWN      &kp RIGHT  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+  &trans    &trans        &trans     &trans      &trans  &trans  &trans  &trans  &trans  &trans
+            &trans        &trans     &trans      &trans  &trans  &trans
             >;
         };
     };
