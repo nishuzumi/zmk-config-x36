@@ -84,17 +84,6 @@
             global-quick-tap;
         };
 
-        ltq: ltq {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LTQ";
-            bindings = <&mo>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <250>;
-            global-quick-tap;
-            quick-tap-ms = <200>;
-        };
-
         bhm: balanced_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
